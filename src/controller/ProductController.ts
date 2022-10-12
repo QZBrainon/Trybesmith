@@ -9,4 +9,12 @@ const insertProduct = async (req: Request, res: Response) => {
   return res.status(201).json(result);
 };
 
-export default insertProduct;
+const getAllProducts = async (_req: Request, res: Response) => {
+  const result = await productService.getAllProducts();
+  return res.status(200).json(result);
+};
+
+export {
+  insertProduct,
+  getAllProducts,
+};

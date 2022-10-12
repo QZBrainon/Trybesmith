@@ -14,6 +14,11 @@ class ProductService {
     const insertId = await this.model.insertProduct(productInfo); 
     return ({ id: insertId, name, amount });
   }
+
+  async getAllProducts() {
+    const result = await this.model.getAllProducts();
+    return result;
+  }
 }
 
 export default ProductService;

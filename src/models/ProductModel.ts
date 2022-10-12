@@ -8,7 +8,7 @@ class ProductModel {
     this.connection = conn;
   }
 
-  getAll = async () => {
+  getAllProducts = async () => {
     const [result] = await this.connection
       .execute<RowDataPacket[]>('SELECT * FROM Trybesmith.Products');
     return result;
