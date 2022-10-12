@@ -6,7 +6,7 @@ const userService = new UserService();
 const register = async (req: Request, res: Response) => {
   const user = req.body;
   const result = await userService.register(user);
-  return res.status(201).json(result);
+  return res.status(201).json({ token: result });
 };
 
 export default register;
