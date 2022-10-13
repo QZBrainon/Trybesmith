@@ -6,7 +6,7 @@ const loginValidator = (req:Request, res:Response, next: NextFunction) => {
   if (validation.error) {
     return res.status(400).json({ message: validation.error.details[0].message });
   }
-  return next();
+  return next(); 
 };
 
 export default loginValidator;
