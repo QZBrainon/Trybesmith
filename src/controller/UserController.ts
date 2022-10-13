@@ -9,4 +9,13 @@ const register = async (req: Request, res: Response) => {
   return res.status(201).json({ token: result });
 };
 
-export default register;
+const login = async (req:Request, res:Response) => {
+  const usernameAndPassword = req.body;
+  const result = await userService.login(usernameAndPassword);
+  if (result === undefined) {
+    return res.status(401).json({ message: 'Username or password invalid' });
+  }
+  return res.status(200).json({ token: result });
+};
+
+export { register, login };
