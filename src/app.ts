@@ -13,10 +13,10 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/products', productsRouter);
+app.use('/products', productNameValidator, productAmountValidator, productsRouter);
 app.use('/users', userRouter);
 app.use('/orders', orderRouter);
-app.use('/login', loginValidator, productNameValidator, productAmountValidator, loginRouter);
+app.use('/login', loginValidator, loginRouter);
 
 app.use(httpErrorHandler);
 
