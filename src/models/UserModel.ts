@@ -1,5 +1,5 @@
 import { Pool, ResultSetHeader, RowDataPacket } from 'mysql2/promise';
-import { IUser } from '../interfaces';
+import { ILogin, IUser } from '../interfaces';
 
 export default class UserModel {
   connection: Pool;
@@ -17,7 +17,7 @@ export default class UserModel {
     return result;
   };
 
-  login = async ({ username, password }:IUser) => {
+  login = async ({ username, password }:ILogin) => {
     const [result] = await this.connection
       .execute<RowDataPacket[]>(
       'SELECT * FROM Trybesmith.Users WHERE username=? AND password=?',

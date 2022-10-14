@@ -1,19 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
-import productSchema from '../joi/productSchema';
+import userSchema from '../joi/userSchema';
 import HttpExeption from '../shared/httpException';
 
-const productNameValidator = (req:Request, res:Response, next: NextFunction) => {
-  const validation = productSchema.validate(req.body);
+const levelValidator = (req:Request, res:Response, next: NextFunction) => {
+  const validation = userSchema.validate(req.body);
   const errorMsg = validation.error?.details[0].message;
 
   switch (errorMsg) {
-    case '"name" is required':
+    case '"level" is required':
       throw new HttpExeption(400, errorMsg);
 
-    case '"name" must be a string':
+    case '"level" must be a number':
       throw new HttpExeption(422, errorMsg);
     
-    case '"name" length must be at least 3 characters long':
+    case '"level" length must be at least 3 characters long':
       throw new HttpExeption(422, errorMsg);
     
     default:
@@ -22,4 +22,4 @@ const productNameValidator = (req:Request, res:Response, next: NextFunction) => 
   return next();
 };
 
-export default productNameValidator;
+export default levelValidator;

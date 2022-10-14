@@ -1,6 +1,6 @@
 import jsonwebtoken from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { IUser } from '../interfaces';
+import { ILogin, IUser } from '../interfaces';
 import connection from '../models/connection';
 import UserModel from '../models/UserModel';
 
@@ -25,7 +25,7 @@ class UserService {
     return token;
   };
 
-  login = async (user:IUser) => {
+  login = async (user:ILogin) => {
     const { username, password } = user;
     const foundUser = await this.model.login(user);
     if (foundUser.length === 0) return undefined;
