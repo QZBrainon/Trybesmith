@@ -8,16 +8,15 @@ const productAmountValidator = (req:Request, res:Response, next: NextFunction) =
   switch (errorMsg) {
     case '"amount" is required':
       throw new HttpExeption(400, errorMsg);
-      break;
 
     case '"amount" must be a string':
       throw new HttpExeption(422, errorMsg);
-      break;
     
-    case '"amount" length must be at least 3 characters long"':
+    case '"amount" length must be at least 3 characters long':
       throw new HttpExeption(422, errorMsg);
-      break;
-  
+
+    case '"name" is not allowed to be empty':
+      throw new HttpExeption(400, '"amount" is required');  
     default:
       break;
   }

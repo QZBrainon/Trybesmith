@@ -14,11 +14,11 @@ class ProductModel {
     return result;
   };
 
-  insertProduct = async ({ name, amount }:IProduct) => {
+  insertProduct = async (product:IProduct) => {
     const [{ insertId }] = await this.connection
       .execute<ResultSetHeader>(
       'INSERT INTO Trybesmith.Products (name, amount) VALUES (?, ?)', 
-      [name, amount],
+      [product.name, product.amount],
     );
     return insertId;
   };
