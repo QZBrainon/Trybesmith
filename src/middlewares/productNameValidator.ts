@@ -5,8 +5,6 @@ import HttpExeption from '../shared/httpException';
 const productNameValidator = (req:Request, res:Response, next: NextFunction) => {
   const validation = productSchema.validate(req.body);
   const errorMsg = validation.error?.details[0].message;
-  console.log(errorMsg);
-  
   switch (errorMsg) {
     case '"name" is required':
       throw new HttpExeption(400, errorMsg);
@@ -16,9 +14,6 @@ const productNameValidator = (req:Request, res:Response, next: NextFunction) => 
     
     case '"name" length must be at least 3 characters long':
       throw new HttpExeption(422, errorMsg);
-    
-    case '"name" is not allowed to be empty':
-      throw new HttpExeption(400, '"name" is required');
     
     default:
       break;
