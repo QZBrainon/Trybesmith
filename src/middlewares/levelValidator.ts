@@ -13,7 +13,7 @@ const levelValidator = (req:Request, res:Response, next: NextFunction) => {
     case '"level" must be a number':
       throw new HttpExeption(422, errorMsg);
     
-    case '"level" length must be at least 3 characters long':
+    case '"level" must be greater than or equal to 1':
       throw new HttpExeption(422, errorMsg);
     
     default:
