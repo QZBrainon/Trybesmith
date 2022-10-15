@@ -1,6 +1,6 @@
 import jsonwebtoken from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { ILogin, IUser } from '../interfaces';
+import { ILogin, IRegisteredUser, IUser } from '../interfaces';
 import connection from '../models/connection';
 import UserModel from '../models/UserModel';
 
@@ -27,9 +27,11 @@ class UserService {
 
   login = async (user:ILogin) => {
     const { username, password } = user;
-    const foundUser = await this.model.login(user);
-    if (foundUser.length === 0) return undefined;
-    const payload = { username, password };
+    const foundUser = await this.model.login(user) as IRegisteredUser;
+    console.log(foundUser);
+    if (!foundUser) return undefined;
+    const userId = foundUser.id; 
+    const payload = { username, password, userId };
     const token = jsonwebtoken.sign(payload, secret);
     return token;
   };

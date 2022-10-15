@@ -1,4 +1,4 @@
-import { Pool, RowDataPacket } from 'mysql2/promise';
+import { Pool, ResultSetHeader, RowDataPacket } from 'mysql2/promise';
 
 class OrderModel {
   connection: Pool;
@@ -17,6 +17,15 @@ class OrderModel {
       group by orderId`,
     );
     return result;
+  };
+
+  postOrder = async (userId:number) => { 
+    const [{ insertId }] = await this.connection
+      .execute<ResultSetHeader>(
+      'INSERT INTO Trybesmith.Orders (userId) VALUES (?)',
+      [userId],
+    );
+    return insertId;
   };
 }
 

@@ -18,7 +18,7 @@ export default class UserModel {
   };
 
   login = async ({ username, password }:ILogin) => {
-    const [result] = await this.connection
+    const [[result]] = await this.connection
       .execute<RowDataPacket[]>(
       'SELECT * FROM Trybesmith.Users WHERE username=? AND password=?',
       [username, password],
